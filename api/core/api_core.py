@@ -12,7 +12,7 @@ class BaseApi:
             'Content-Type': 'application/json'
         }
 
-    def get(self, url: str, expected_statuscode=200, override_headers: dict = None) -> Union[Dict, str]:
+    def get(self, url: str, expected_status_code=200, override_headers: dict = None) -> Union[Dict, str]:
         r = requests.get(self.API_URL + url, headers={**self.headers, **(override_headers if override_headers else {})})
 
         try:
@@ -20,7 +20,7 @@ class BaseApi:
         except json.JSONDecodeError:
             response = r.text
 
-        assert expected_statuscode == r.status_code, json.dumps(
+        assert expected_status_code == r.status_code, json.dumps(
             {'status_code': r.status_code, 'error': response})
 
         return response
