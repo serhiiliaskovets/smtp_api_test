@@ -9,7 +9,7 @@ class TestMembers(BaseTest):
         members = self.members.get_members()
 
         assert members['status'] == 'success', f'The received in the body status is not "success": {members["status"]}'
-        assert members['data']['members'], f'No member were returned in the response: {members}'
+        assert members['data']['members'], f'No member was returned in the response: {members}'
         self.validate_member_object(members['data']['members'][0])
 
     # failed as probation_period is not integer in response. We suppose that GET members response is the correct one.
